@@ -74,7 +74,7 @@ const submitPost = async () => {
     try {
         loading.value = true
 
-        const response = await useApiFetch<{ chatlogs: IChatlog[] }>('/api/v1/admin/user-chatlog', { body: postForm.value, method: 'POST' })
+        const response = await $fetch<{ chatlogs: IChatlog[] }>('/api/user-chatlog', { body: postForm.value, method: 'POST' })
 
         chatlogs.value = response.chatlogs
 

@@ -1,56 +1,57 @@
 import type { UserData } from '~/types'
 
 export const useAuthUser = () => useState<UserData | null>('user', () => null)
+export const useTokenJwt = () => useCookie<string | null>('token-jwt')
 
 export const useAuth = () => {
-    const authUser = useAuthUser()
-    const authToken = useCookie('auth-token')
-    const { showMessage } = useNotification()
+  const authUser = useAuthUser()
+  const tokenJwt = useTokenJwt()
 
-    const setUser = (user: UserData | null) => {
-        authUser.value = user
+  const setUser = (user: UserData | null) => {
+    authUser.value = user
+  }
+
+  const setTokenJwt = (token: string | null) => {
+    tokenJwt.value = token
+  }
+
+  const login = async (name: string, password: string, rememberMe: boolean): Promise<boolean> => {
+    const token = await $fetch('/auth/login', { body: { name, password, rememberMe }, method: 'post' })
+
+    setTokenJwt(token)
+
+    await nextTick(async () => await me())
+
+    return true
+  }
+
+  const logout = async () => {
+    try {
+      setUser(null)
+      setTokenJwt(null)
+      navigateTo('/')
+    } catch (e: unknown) {
+      console.error(e)
     }
+  }
 
-    const setCookieToken = (token: string) => {
-        authToken.value = token
+  const me = async () => {
+    try {
+      if (!authUser.value) {
+        const user = await $fetch('/auth/me')
+
+        setUser(user)
+      }
+    } catch (e: unknown) {
+      console.error(e)
     }
+  }
 
-    const login = async (username: string, password: string) => {
-        const data = await useApiFetch<{ Authorization: string }>('/api/v1/login', { body: { username, password }, method: 'POST' })
-
-        const token = data.Authorization?.split('Bearer ')[1]
-
-        setCookieToken(token)
-
-        await nextTick()
-
-        await me()
-    }
-
-    const logout = async () => {
-        setCookieToken('')
-        setUser(null)
-        navigateTo('/')
-        showMessage({ message: 'Vous avez été déconnecté' })
-    }
-
-    const me = async () => {
-        try {
-            if (!authUser.value && authToken.value) {
-                const { user } = await useApiFetch<{ user: UserData }>('/api/v1/userdata')
-
-                if (user.rank >= 6) setUser(user)
-                else logout()
-            }
-        } catch (e: unknown) {
-            console.error(e)
-        }
-    }
-
-    return {
-        login,
-        logout,
-        me,
-        authUser,
-    }
+  return {
+    login,
+    logout,
+    me,
+    authUser,
+    tokenJwt
+  }
 }

@@ -68,7 +68,7 @@ const submitPost = async () => {
     try {
         loading.value = true
 
-        const response = await useApiFetch<{ cmd: ICmdlog[] }>('/api/v1/admin/user-command', { body: postForm.value, method: 'POST' })
+        const response = await $fetch<{ cmd: ICmdlog[] }>('/api/user-command', { body: postForm.value, method: 'POST' })
 
         cmdlogs.value = response.cmd
 

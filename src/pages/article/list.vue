@@ -68,7 +68,7 @@ const getRows = async () => {
 
     loading.value = true
     try {
-        const data = await useApiFetch<{ news: INew[]; totalPage: number }>('/api/v1/admin/article?page=' + pageCurrent.value)
+        const data = await $fetch<{ news: INew[]; totalPage: number }>('/api/article?page=' + pageCurrent.value)
 
         pageCount.value = data.totalPage
         rows.value = data.news
@@ -86,7 +86,7 @@ const deleteRow = async (id: number) => {
     try {
         loading.value = true
 
-        await useApiFetch('/api/v1/admin/article/' + id, { method: 'DELETE' })
+        await $fetch('/api/article/' + id, { method: 'DELETE' })
 
         rows.value = rows.value.filter((x) => x.id != id)
 

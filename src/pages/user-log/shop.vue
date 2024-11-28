@@ -55,7 +55,7 @@ const submitPost = async () => {
     try {
         loading.value = true
 
-        const response = await useApiFetch<{ achat: IBoutiqueLog[] }>('/api/v1/admin/user-shop', { body: postForm.value, method: 'POST' })
+        const response = await $fetch<{ achat: IBoutiqueLog[] }>('/api/user-shop', { body: postForm.value, method: 'POST' })
 
         achat.value = response.achat
 

@@ -59,7 +59,7 @@ const submitPost = async () => {
     try {
         loading.value = true
 
-        const response = await useApiFetch<{ bans: IBan[] }>('/api/v1/admin/user-ban', { body: postForm.value, method: 'POST' })
+        const response = await $fetch<{ bans: IBan[] }>('/api/user-ban', { body: postForm.value, method: 'POST' })
 
         bans.value = response.bans
 

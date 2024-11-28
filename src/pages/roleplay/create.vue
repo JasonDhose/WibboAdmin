@@ -96,7 +96,7 @@ const submitPost = async () => {
         formData.append('type', postForm.value.type)
         formData.append('category', postForm.value.category)
 
-        await await useApiFetch('/api/v1/admin/roleplayitem', { body: formData, method: 'POST', headers: { 'Content-Type': 'multipart/form-data' } })
+        await await $fetch('/api/roleplayitem', { body: formData, method: 'POST', headers: { 'Content-Type': 'multipart/form-data' } })
 
         showMessage({
             message: 'Votre object a bien été ajouter',

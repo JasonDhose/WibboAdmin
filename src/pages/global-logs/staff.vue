@@ -65,7 +65,7 @@ const getRows = async () => {
 
     loading.value = true
     try {
-        const data = await useApiFetch<{ logs: IStaff[]; totalPage: number }>('/api/v1/admin/global-history?page=' + pageCurrent.value)
+        const data = await $fetch<{ logs: IStaff[]; totalPage: number }>('/api/global-history?page=' + pageCurrent.value)
 
         pageCount.value = data.totalPage
         rows.value = data.logs

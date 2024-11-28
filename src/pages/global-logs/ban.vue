@@ -69,7 +69,7 @@ const getRows = async () => {
 
     loading.value = true
     try {
-        const data = await useApiFetch<{ bans: IBan[]; totalPage: number }>('/api/v1/admin/global-ban?page=' + pageCurrent.value)
+        const data = await $fetch<{ bans: IBan[]; totalPage: number }>('/api/global-ban?page=' + pageCurrent.value)
 
         pageCount.value = data.totalPage
         rows.value = data.bans

@@ -38,7 +38,7 @@ const submitPost = async () => {
         const formData = new FormData()
         formData.append('file', file.value)
 
-        await useApiFetch('/api/v1/admin/upload-mp3', { body: formData, method: 'POST', headers: { 'Content-Type': 'multipart/form-data' } })
+        await $fetch('/api/upload-mp3', { body: formData, method: 'POST', headers: { 'Content-Type': 'multipart/form-data' } })
 
         showMessage({
             message: 'Votre fichier a été ajouté !',

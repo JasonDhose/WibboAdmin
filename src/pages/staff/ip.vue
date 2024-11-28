@@ -48,7 +48,7 @@ const getRows = async () => {
 
     loading.value = true
     try {
-        const data = await useApiFetch<{ staffs: IStaff[] }>('/api/v1/admin/ipstaff')
+        const data = await $fetch<{ staffs: IStaff[] }>('/api/ipstaff')
 
         staffs.value = data.staffs
     } catch (e) {
@@ -65,7 +65,7 @@ const updateStaff = async (data: IStaff) => {
     try {
         loading.value = true
 
-        await useApiFetch('/api/v1/admin/ipstaff', { body: data, method: 'POST' })
+        await $fetch('/api/ipstaff', { body: data, method: 'POST' })
 
         showMessage({
             message: "L'Internet Protocole Staff a été mise à jour",

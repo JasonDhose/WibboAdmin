@@ -57,7 +57,7 @@ const submitPost = async () => {
         formData.append('roomid', postForm.value.roomid)
         formData.append('category', postForm.value.category)
 
-        await useApiFetch('/api/v1/admin/navigator', { body: formData, method: 'POST', headers: { 'Content-Type': 'multipart/form-data' } })
+        await $fetch('/api/navigator', { body: formData, method: 'POST', headers: { 'Content-Type': 'multipart/form-data' } })
 
         showMessage({
             message: 'Votre appart a bien été ajouter au navigateur',

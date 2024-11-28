@@ -1,34 +1,39 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+const ONE_DAY = 60 * 60 * 24 * 1000
+const ONE_WEEK = ONE_DAY * 7
 
 export default defineNuxtConfig({
-    devServer: {
-        port: 3002,
-    },
-    ssr: false,
-    router: {
-        options: {
-            hashMode: true,
-        },
-    },
-    srcDir: 'src/',
+  srcDir: 'src/',
 
-    runtimeConfig: {
-        public: {
-            apiBase: process.env.NUXT_PUBLIC_API_BASE,
-            urlAssets: process.env.NUXT_PUBLIC_URL_ASSETS || '',
-            urlCdn: process.env.NUXT_PUBLIC_URL_CDN || '',
-            tinymceApi: process.env.NUXT_PUBLIC_TINYMCE_API || '',
-        },
-    },
+  devServer: {
+      port: 3002,
+  },
 
-    app: {
-        pageTransition: { name: 'page', mode: 'out-in' },
-    },
+  runtimeConfig: {
+      databaseUrl: process.env.NUXT_DATABASE_URL || '',
 
-    typescript: {
-        shim: false,
-        strict: true,
-    },
+      tokenSecret: process.env.NUXT_TOKEN_SECRET || '',
+      tokenExpires: parseInt(process.env.NUXT_TOKEN_EXPIRES || ONE_DAY.toString(), 10), // 1 day
+      tokenRememberMeExpires: parseInt(process.env.NUXT_TOKEN_REMEMBER_ME_EXPIRES || ONE_WEEK.toString(), 10), // 7 days
 
-    modules: ['@nuxtjs/tailwindcss'],
+      uploadUrl: process.env.NUXT_UPLOAD_URL || '',
+
+      public: {
+          urlAssets: process.env.NUXT_PUBLIC_URL_ASSETS || '',
+          urlCdn: process.env.NUXT_PUBLIC_URL_CDN || '',
+          tinymceApi: process.env.NUXT_PUBLIC_TINYMCE_API || '',
+      },
+  },
+
+  app: {
+      pageTransition: { name: 'page', mode: 'out-in' },
+  },
+
+  typescript: {
+      shim: false,
+      strict: true,
+  },
+
+  modules: ['@nuxtjs/tailwindcss'],
+  compatibilityDate: '2024-11-05',
 })

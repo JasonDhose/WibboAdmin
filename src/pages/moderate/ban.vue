@@ -62,7 +62,7 @@ const submitPost = async () => {
     try {
         loading.value = true
 
-        await useApiFetch('/api/v1/admin/ban', { body: postForm.value, method: 'POST' })
+        await $fetch('/api/ban', { body: postForm.value, method: 'POST' })
 
         showMessage({
             message: "L'utilisateur a bien été banni",

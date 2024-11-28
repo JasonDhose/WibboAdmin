@@ -55,7 +55,7 @@ const submitPost = async () => {
     try {
         loading.value = true
 
-        const response = await useApiFetch<{ logs: IFlagme[] }>('/api/v1/admin/user-flagme', { body: postForm.value, method: 'POST' })
+        const response = await $fetch<{ logs: IFlagme[] }>('/api/user-flagme', { body: postForm.value, method: 'POST' })
 
         logs.value = response.logs
 

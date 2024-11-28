@@ -48,7 +48,7 @@ const getRows = async () => {
 
     loading.value = true
     try {
-        const data = await useApiFetch<{ users: IUser[] }>('/api/v1/admin/last-users')
+        const data = await $fetch<{ users: IUser[] }>('/api/user/last')
 
         users.value = data.users
     } catch (e) {
@@ -71,7 +71,7 @@ const banUser = (user: IUser) => {
         formData.append('time', '100008')
         formData.append('type', '2')
 
-        useApiFetch('/api/v1/admin/ban', { body: formData, method: 'POST' })
+        $fetch('/api/ban', { body: formData, method: 'POST' })
 
         showMessage({
             message: "L'utilisateur a bien été banni",

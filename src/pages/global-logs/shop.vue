@@ -64,7 +64,7 @@ const getRows = async () => {
 
     loading.value = true
     try {
-        const data = await useApiFetch<{ achat: IBoutiqueLog[]; totalPage: number }>('/api/v1/admin/global-shop?page=' + pageCurrent.value)
+        const data = await $fetch<{ achat: IBoutiqueLog[]; totalPage: number }>('/api/global-shop?page=' + pageCurrent.value)
 
         pageCount.value = data.totalPage
         rows.value = data.achat

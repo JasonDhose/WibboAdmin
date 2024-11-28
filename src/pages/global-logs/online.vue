@@ -36,7 +36,7 @@ const getRows = async () => {
 
     loading.value = true
     try {
-        const data = await useApiFetch<{ now: IStat[]; lastweek: IStat[] }>('/api/v1/admin/stats')
+        const data = await $fetch<{ now: IStat[]; lastweek: IStat[] }>('/api/stats')
 
         now.value = data.now
         lastweek.value = data.lastweek

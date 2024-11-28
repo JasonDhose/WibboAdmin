@@ -33,7 +33,7 @@ const submitPost = async () => {
     try {
         loading.value = true
 
-        const response = await useApiFetch<{ count: number }>('/api/v1/admin/badge-count', { body: postForm.value, method: 'POST' })
+        const response = await $fetch<{ count: number }>('/api/badge-count', { body: postForm.value, method: 'POST' })
 
         const count = response.count
 

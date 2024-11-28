@@ -66,7 +66,7 @@ const getRows = async () => {
 
     loading.value = true
     try {
-        const data = await useApiFetch<{ cmdlogs: ICmdlog[]; totalPage: number }>('/api/v1/admin/global-command?page=' + pageCurrent.value)
+        const data = await $fetch<{ cmdlogs: ICmdlog[]; totalPage: number }>('/api/global-command?page=' + pageCurrent.value)
 
         pageCount.value = data.totalPage
         rows.value = data.cmdlogs

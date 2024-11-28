@@ -33,7 +33,7 @@ const submitPost = async () => {
     try {
         loading.value = true
 
-        await useApiFetch('/api/v1/admin/flagme', { method: 'POST', body: postForm.value })
+        await $fetch('/api/flagme', { method: 'POST', body: postForm.value })
 
         showMessage({
             message: 'Le pseudonyme a été délivré',

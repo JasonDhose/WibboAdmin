@@ -95,7 +95,7 @@ const getRows = async () => {
 
     loading.value = true
     try {
-        const data = await useApiFetch<{ items: IRpItem[]; totalPage: number }>('/api/v1/admin/roleplayitem?page=' + pageCurrent.value)
+        const data = await $fetch<{ items: IRpItem[]; totalPage: number }>('/api/roleplayitem?page=' + pageCurrent.value)
 
         pageCount.value = data.totalPage
         rows.value = data.items
@@ -115,7 +115,7 @@ const updateItem = async (data: IRpItem) => {
     try {
         loading.value = true
 
-        await useApiFetch('/api/v1/admin/roleplayitem/' + data.id, { body: data, method: 'PUT' })
+        await $fetch('/api/roleplayitem/' + data.id, { body: data, method: 'PUT' })
 
         showMessage({
             message: 'Mise à jour réussi',

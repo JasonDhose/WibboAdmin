@@ -12,10 +12,10 @@
                         <label class="block mb-1">Mot de passe</label>
                         <BaseInput type="password" placeholder="Mot de passe" v-model="loginForm.password" />
                     </div>
-                    <!-- <label for="rememberMe" class="flex items-center justify-between cursor-pointer">
+                    <label for="rememberMe" class="flex items-center justify-between cursor-pointer">
                         <div class="leading-8">Se souvenir de moi</div>
                         <BaseCheckBox id="rememberMe" name="remember" v-model="loginForm.rememberMe" />
-                    </label> -->
+                    </label>
 
                     <BaseButton class="flex justify-center">Connexion</BaseButton>
                 </form>
@@ -56,7 +56,7 @@ const formLogin = async () => {
     loading.value = true
 
     try {
-        await login(loginForm.value.username, loginForm.value.password)
+        await login(loginForm.value.username, loginForm.value.password, loginForm.value.rememberMe)
 
         localStorage.setItem('username', loginForm.value.username)
 

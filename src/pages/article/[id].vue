@@ -80,7 +80,7 @@ const loading = ref(false)
 const editNew = ref<INew | null>(null)
 
 try {
-    const data = await useApiFetch<{ new: INew }>('/api/v1/admin/article/' + route.params.id)
+    const data = await $fetch<{ new: INew }>('/api/article/' + route.params.id)
 
     editNew.value = data.new
 } catch (e) {
@@ -93,7 +93,7 @@ const submitPost = async () => {
     try {
         loading.value = true
 
-        await useApiFetch('/api/v1/admin/article/' + editNew.value.id, { body: editNew.value, method: 'PUT' })
+        await $fetch('/api/article', { body: editNew.value, method: 'PUT' })
 
         showMessage({
             message: "L'article a bien été mise à jour",

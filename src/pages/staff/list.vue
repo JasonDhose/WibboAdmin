@@ -46,7 +46,7 @@ const getRows = async () => {
 
     loading.value = true
     try {
-        const data = await useApiFetch<{ staffs: IStaff[] }>('/api/v1/admin/staffs')
+        const data = await $fetch<{ staffs: IStaff[] }>('/api/staffs')
 
         staffs.value = data.staffs
     } catch (e) {
@@ -63,7 +63,7 @@ const updateStaff = async (data: IStaff) => {
     try {
         loading.value = true
 
-        await useApiFetch('/api/v1/admin/staffs', { body: data, method: 'POST' })
+        await $fetch('/api/staffs', { body: data, method: 'POST' })
 
         showMessage({
             message: 'Mise à jour réussi',

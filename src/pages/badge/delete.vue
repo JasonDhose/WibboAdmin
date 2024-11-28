@@ -38,7 +38,7 @@ const submitPost = async () => {
     try {
         loading.value = true
 
-        await useApiFetch('/api/v1/admin/badge/' + postForm.value.username + '/' + postForm.value.code, { method: 'DELETE' })
+        await $fetch('/api/badge/' + postForm.value.username + '/' + postForm.value.code, { method: 'DELETE' })
 
         showMessage({
             message: 'Le badge a été supprimé',

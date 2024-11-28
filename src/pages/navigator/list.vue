@@ -60,7 +60,7 @@ const getRows = async () => {
 
     loading.value = true
     try {
-        const data = await useApiFetch<{ nav: INav[] }>('/api/v1/admin/navigator')
+        const data = await $fetch<{ nav: INav[] }>('/api/navigator')
 
         rows.value = data.nav
     } catch (e) {
@@ -77,7 +77,7 @@ const deleteNav = async (id: number) => {
     try {
         loading.value = true
 
-        await useApiFetch('/api/v1/admin/navigator/' + id, { method: 'DELETE' })
+        await $fetch('/api/navigator/' + id, { method: 'DELETE' })
 
         rows.value = rows.value.filter((x) => x.room_id)
 

@@ -33,7 +33,7 @@ const submitPost = async () => {
     try {
         loading.value = true
 
-        await useApiFetch('/api/v1/admin/rank/' + postForm.value.username, { method: 'DELETE' })
+        await $fetch('/api/rank/' + postForm.value.username, { method: 'DELETE' })
 
         showMessage({
             message: "L'utilisateur a été dérang",

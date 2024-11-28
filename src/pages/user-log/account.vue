@@ -53,7 +53,7 @@ const submitPost = async () => {
     try {
         loading.value = true
 
-        const response = await useApiFetch<{ users: IUser[] }>('/api/v1/admin/user-account', { body: postForm.value, method: 'POST' })
+        const response = await $fetch<{ users: IUser[] }>('/api/user/search', { body: postForm.value, method: 'POST' })
 
         users.value = response.users
 

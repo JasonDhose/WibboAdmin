@@ -82,7 +82,7 @@ const submitPost = async () => {
     try {
         loading.value = true
 
-        await useApiFetch('/api/v1/admin/article', { body: postForm.value, method: 'POST' })
+        await $fetch('/api/article', { body: postForm.value, method: 'POST' })
 
         showMessage({
             message: "L'article est publié !",
